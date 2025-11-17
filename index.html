@@ -865,28 +865,71 @@
                                 <div class="panel-title">zero-hunger-backend/src/DonationService.java</div>
                             </div>
                             <div class="panel-body">
-                                <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">public class</span> <span class="ty">DonationService</span> {</span></div>
-                                <div class="code-line"><span class="ln">02</span><span class="src">    <span class="cm">// match donor listings to nearest charities using geo-coordinates</span></span></div>
-                                <div class="code-line"><span class="ln">03</span><span class="src">    <span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">CharityMatch</span>&gt; <span class="fn">suggestMatches</span>(<span class="ty">Donation</span> donation) {</span></div>
-                                <div class="code-line"><span class="ln">04</span><span class="src">        <span class="ty">Coordinate</span> origin = donation.<span class="fn">getLocation</span>();</span></div>
-                                <div class="code-line"><span class="ln">05</span><span class="src">        <span class="ty">List</span>&lt;<span class="ty">Charity</span>&gt; candidates = charityRepository.<span class="fn">findAllActive</span>();</span></div>
-                                <div class="code-line"><span class="ln">06</span><span class="src"></span></div>
-                                <div class="code-line"><span class="ln">07</span><span class="src">        <span class="ty">PriorityQueue</span>&lt;<span class="ty">CharityMatch</span>&gt; queue =</span></div>
-                                <div class="code-line"><span class="ln">08</span><span class="src">            <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a, b) -&gt; <span class="ty">Double</span>.<span class="fn">compare</span>(a.distanceKm(), b.distanceKm()));</span></div>
-                                <div class="code-line"><span class="ln">09</span><span class="src"></span></div>
-                                <div class="code-line"><span class="ln">10</span><span class="src">        <span class="kw">for</span> (<span class="ty">Charity</span> charity : candidates) {</span></div>
-                                <div class="code-line"><span class="ln">11</span><span class="src">            <span class="ty">double</span> distance = geo.<span class="fn">distanceKm</span>(origin, charity.<span class="fn">getLocation</span>());</span></div>
-                                <div class="code-line"><span class="ln">12</span><span class="src">            queue.<span class="fn">add</span>(<span class="kw">new</span> <span class="ty">CharityMatch</span>(charity, distance));</span></div>
-                                <div class="code-line"><span class="ln">13</span><span class="src">        }</span></div>
-                                <div class="code-line"><span class="ln">14</span><span class="src"></span></div>
-                                <div class="code-line"><span class="ln">15</span><span class="src">        <span class="kw">return</span> queue.<span class="fn">stream</span>()</span></div>
-                                <div class="code-line"><span class="ln">16</span><span class="src">            .<span class="fn">limit</span>(10)</span></div>
-                                <div class="code-line"><span class="ln">17</span><span class="src">            .<span class="fn">toList</span>();</span></div>
-                                <div class="code-line"><span class="ln">18</span><span class="src">    }</span></div>
-                                <div class="code-line"><span class="ln">19</span><span class="src">}</span></div>
-                                <div class="code-line"><span class="ln">20</span><span class="src"></span></div>
-                                <div class="code-line"><span class="ln">21</span><span class="src"><span class="cm">// actual project: ZeroHunger – full-stack donation platform</span></span></div>
-                            </div>
+    <!-- Snippet 1: ZeroHunger -->
+    <div class="code-snippet active">
+        <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">public class</span> <span class="ty">DonationService</span> {</span></div>
+        <div class="code-line"><span class="ln">02</span><span class="src">    <span class="cm">// match donor listings to nearest charities using geo-coordinates</span></span></div>
+        <div class="code-line"><span class="ln">03</span><span class="src">    <span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">CharityMatch</span>&gt; <span class="fn">suggestMatches</span>(<span class="ty">Donation</span> donation) {</span></div>
+        <div class="code-line"><span class="ln">04</span><span class="src">        <span class="ty">Coordinate</span> origin = donation.<span class="fn">getLocation</span>();</span></div>
+        <div class="code-line"><span class="ln">05</span><span class="src">        <span class="ty">List</span>&lt;<span class="ty">Charity</span>&gt; candidates = charityRepository.<span class="fn">findAllActive</span>();</span></div>
+        <div class="code-line"><span class="ln">06</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">07</span><span class="src">        <span class="ty">PriorityQueue</span>&lt;<span class="ty">CharityMatch</span>&gt; queue =</span></div>
+        <div class="code-line"><span class="ln">08</span><span class="src">            <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a, b) -&gt; <span class="ty">Double</span>.<span class="fn">compare</span>(a.distanceKm(), b.distanceKm()));</span></div>
+        <div class="code-line"><span class="ln">09</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">10</span><span class="src">        <span class="kw">for</span> (<span class="ty">Charity</span> charity : candidates) {</span></div>
+        <div class="code-line"><span class="ln">11</span><span class="src">            <span class="ty">double</span> distance = geo.<span class="fn">distanceKm</span>(origin, charity.<span class="fn">getLocation</span>());</span></div>
+        <div class="code-line"><span class="ln">12</span><span class="src">            queue.<span class="fn">add</span>(<span class="kw">new</span> <span class="ty">CharityMatch</span>(charity, distance));</span></div>
+        <div class="code-line"><span class="ln">13</span><span class="src">        }</span></div>
+        <div class="code-line"><span class="ln">14</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">15</span><span class="src">        <span class="kw">return</span> queue.<span class="fn">stream</span>()</span></div>
+        <div class="code-line"><span class="ln">16</span><span class="src">            .<span class="fn">limit</span>(10)</span></div>
+        <div class="code-line"><span class="ln">17</span><span class="src">            .<span class="fn">toList</span>();</span></div>
+        <div class="code-line"><span class="ln">18</span><span class="src">    }</span></div>
+        <div class="code-line"><span class="ln">19</span><span class="src">}</span></div>
+        <div class="code-line"><span class="ln">20</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">21</span><span class="src"><span class="cm">// ZeroHunger – full-stack donation platform</span></span></div>
+    </div>
+
+    <!-- Snippet 2: Warehouse server -->
+    <div class="code-snippet">
+        <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">class</span> <span class="ty">WarehouseServerThread</span> <span class="kw">extends</span> <span class="ty">Thread</span> {</span></div>
+        <div class="code-line"><span class="ln">02</span><span class="src">    <span class="kw">private final</span> <span class="ty">WarehouseState</span> state;</span></div>
+        <div class="code-line"><span class="ln">03</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">04</span><span class="src">    <span class="kw">public</span> <span class="fn">run</span>() {</span></div>
+        <div class="code-line"><span class="ln">05</span><span class="src">        <span class="kw">while</span> (client.<span class="fn">isConnected</span>()) {</span></div>
+        <div class="code-line"><span class="ln">06</span><span class="src">            <span class="ty">String</span> command = in.<span class="fn">readLine</span>();</span></div>
+        <div class="code-line"><span class="ln">07</span><span class="src">            <span class="kw">synchronized</span> (state) {</span></div>
+        <div class="code-line"><span class="ln">08</span><span class="src">                <span class="cm">// safely update apples / oranges stock</span></span></div>
+        <div class="code-line"><span class="ln">09</span><span class="src">                <span class="fn">handleCommand</span>(command);</span></div>
+        <div class="code-line"><span class="ln">10</span><span class="src">            }</span></div>
+        <div class="code-line"><span class="ln">11</span><span class="src">        }</span></div>
+        <div class="code-line"><span class="ln">12</span><span class="src">    }</span></div>
+        <div class="code-line"><span class="ln">13</span><span class="src">}</span></div>
+        <div class="code-line"><span class="ln">14</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">15</span><span class="src"><span class="cm">// Warehouse Server – multi-threaded TCP application</span></span></div>
+    </div>
+
+    <!-- Snippet 3: CNN -->
+    <div class="code-snippet">
+        <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">model</span> = tf.keras.models.<span class="fn">Sequential</span>([</span></div>
+        <div class="code-line"><span class="ln">02</span><span class="src">    tf.keras.layers.<span class="fn">Conv2D</span>(16, 3, <span class="st">'same'</span>, activation=<span class="st">'relu'</span>),</span></div>
+        <div class="code-line"><span class="ln">03</span><span class="src">    tf.keras.layers.<span class="fn">MaxPooling2D</span>(pool_size=(2, 2)),</span></div>
+        <div class="code-line"><span class="ln">04</span><span class="src">    tf.keras.layers.<span class="fn">Conv2D</span>(32, 3, <span class="st">'same'</span>, activation=<span class="st">'relu'</span>),</span></div>
+        <div class="code-line"><span class="ln">05</span><span class="src">    tf.keras.layers.<span class="fn">MaxPooling2D</span>(pool_size=(2, 2)),</span></div>
+        <div class="code-line"><span class="ln">06</span><span class="src">    tf.keras.layers.<span class="fn">Flatten</span>(),</span></div>
+        <div class="code-line"><span class="ln">07</span><span class="src">    tf.keras.layers.<span class="fn">Dense</span>(128, activation=<span class="st">'relu'</span>),</span></div>
+        <div class="code-line"><span class="ln">08</span><span class="src">    tf.keras.layers.<span class="fn">Dropout</span>(0.25),</span></div>
+        <div class="code-line"><span class="ln">09</span><span class="src">    tf.keras.layers.<span class="fn">Dense</span>(NUM_CLASSES)</span></div>
+        <div class="code-line"><span class="ln">10</span><span class="src">])</span></div>
+        <div class="code-line"><span class="ln">11</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">12</span><span class="src">model.<span class="fn">compile</span>(optimizer=<span class="st">'adam'</span>,</span></div>
+        <div class="code-line"><span class="ln">13</span><span class="src">              loss=tf.keras.losses.<span class="fn">SparseCategoricalCrossentropy</span>(from_logits=<span class="kw">True</span>),</span></div>
+        <div class="code-line"><span class="ln">14</span><span class="src">              metrics=[<span class="st">'accuracy'</span>])</span></div>
+        <div class="code-line"><span class="ln">15</span><span class="src"></span></div>
+        <div class="code-line"><span class="ln">16</span><span class="src"><span class="cm"># DeepLearningRepo – brain tumour CNN</span></span></div>
+    </div>
+</div>
+
                             <div class="panel-footer">
                                 <span>ZeroHunger · Spring Boot · React</span>
                                 <span>status: <span style="color: var(--accent-strong); font-weight: 500;">shipped (uni project)</span></span>
