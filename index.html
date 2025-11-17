@@ -390,7 +390,9 @@
             font-size: 0.74rem;
             color: #e5f3ff;
             max-height: 250px;
-            overflow: hidden;
+            max-height: 250px;
+            overflow-y: hidden;
+            overflow-x: auto;
         }
 
         .code-line {
@@ -401,15 +403,16 @@
 
         .code-line .ln {
             opacity: 0.45;
-            width: 2.2ch;        /* nice fixed width for line numbers */
+            width: 2.2ch;        /* fixed column for line numbers */
             text-align: right;
+            flex-shrink: 0;
         }
 
         .code-line .src {
+            white-space: pre;     /* preserve indentation spaces */
             flex: 1;
-            white-space: pre;     /* keep indentation */
-            overflow: hidden;     /* stops wild overflow, but no ellipsis */
         }
+
 
 
         .kw { color: #38bdf8; }
