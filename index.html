@@ -31,6 +31,16 @@
         html {
             scroll-behavior: smooth;
         }
+        .code-line .ln {
+            width: 2.2ch;      /* width based on character units */
+            text-align: right;
+        }
+
+        .code-line .src {
+            flex: 1;
+            white-space: pre;  /* keep indentation spacing */
+        }
+
 
         .code-snippet {
             display: none;
@@ -944,8 +954,12 @@
                             </div>
 
                             <div class="panel-footer">
-                                <span>ZeroHunger · Spring Boot · React</span>
-                                <span>status: <span style="color: var(--accent-strong); font-weight: 500;">shipped (uni project)</span></span>
+                                <span id="snippetLabel">ZeroHunger · Spring Boot · React</span>
+                                <span>status:
+                                    <span id="snippetStatus" style="color: var(--accent-strong); font-weight: 500;">
+                                        shipped (uni project)
+                                    </span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1287,22 +1301,52 @@
     // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Rotate code snippets in the hero panel
+    // Rotate code snippets in the hero panel + update footer
     const snippets = document.querySelectorAll('.code-snippet');
     let currentSnippetIndex = 0;
 
+    // Meta info for each snippet (same order as the snippets in HTML)
+    const snippetMeta = [
+        {
+            label: 'ZeroHunger · Spring Boot · React',
+            status: 'shipped (uni project)',
+        },
+        {
+            label: 'Warehouse Server · Java · TCP',
+            status: 'shipped (uni project)',
+        },
+        {
+            label: 'DeepLearningRepo · Python · TensorFlow',
+            status: 'coursework (ML)',
+        },
+    ];
+
+    const snippetLabelEl = document.getElementById('snippetLabel');
+    const snippetStatusEl = document.getElementById('snippetStatus');
+
+    function applySnippetMeta(index) {
+        if (!snippetLabelEl || !snippetStatusEl) return;
+        const meta = snippetMeta[index];
+        snippetLabelEl.textContent = meta.label;
+        snippetStatusEl.textContent = meta.status;
+    }
+
     if (snippets.length > 0) {
-        // Ensure exactly one starts active
+        // Show first snippet + its meta
         snippets.forEach((snip, idx) => {
             snip.classList.toggle('active', idx === 0);
         });
+        applySnippetMeta(0);
 
+        // Rotate every 5s
         setInterval(() => {
             snippets[currentSnippetIndex].classList.remove('active');
             currentSnippetIndex = (currentSnippetIndex + 1) % snippets.length;
             snippets[currentSnippetIndex].classList.add('active');
-        }, 5000); // 5000ms = 5 seconds
+            applySnippetMeta(currentSnippetIndex);
+        }, 5000);
     }
+
 
 </script>
 </body>
