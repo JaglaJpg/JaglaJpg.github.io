@@ -31,15 +31,6 @@
         html {
             scroll-behavior: smooth;
         }
-        .code-line .ln {
-            width: 2.2ch;      /* width based on character units */
-            text-align: right;
-        }
-
-        .code-line .src {
-            flex: 1;
-            white-space: pre;  /* keep indentation spacing */
-        }
 
 
         .code-snippet {
@@ -410,15 +401,16 @@
 
         .code-line .ln {
             opacity: 0.45;
-            width: 1.4rem;
+            width: 2.2ch;        /* nice fixed width for line numbers */
             text-align: right;
         }
 
         .code-line .src {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            flex: 1;
+            white-space: pre;     /* keep indentation */
+            overflow: hidden;     /* stops wild overflow, but no ellipsis */
         }
+
 
         .kw { color: #38bdf8; }
         .fn { color: #f97316; }
@@ -885,7 +877,7 @@
                                     <span class="panel-dot"></span>
                                     <span class="panel-dot"></span>
                                 </div>
-                                <div class="panel-title">zero-hunger-backend/src/DonationService.java</div>
+                                <div class="panel-title" id="snippetTitle">zero-hunger-backend/src/DonationService.java</div>
                             </div>
                             <div class="panel-body">
                                 <!-- Snippet 1: ZeroHunger -->
@@ -918,7 +910,7 @@
                                     <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">class</span> <span class="ty">WarehouseServerThread</span> <span class="kw">extends</span> <span class="ty">Thread</span> {</span></div>
                                     <div class="code-line"><span class="ln">02</span><span class="src">    <span class="kw">private final</span> <span class="ty">WarehouseState</span> state;</span></div>
                                     <div class="code-line"><span class="ln">03</span><span class="src"></span></div>
-                                    <div class="code-line"><span class="ln">04</span><span class="src">    <span class="kw">public</span> <span class="fn">run</span>() {</span></div>
+                                    <div class="code-line"><span class="ln">04</span><span class="src">    <span class="kw">public</span> <span class="ty">void</span> <span class="fn">run</span>() {</span></div>
                                     <div class="code-line"><span class="ln">05</span><span class="src">        <span class="kw">while</span> (client.<span class="fn">isConnected</span>()) {</span></div>
                                     <div class="code-line"><span class="ln">06</span><span class="src">            <span class="ty">String</span> command = in.<span class="fn">readLine</span>();</span></div>
                                     <div class="code-line"><span class="ln">07</span><span class="src">            <span class="kw">synchronized</span> (state) {</span></div>
@@ -1308,28 +1300,36 @@
     // Meta info for each snippet (same order as the snippets in HTML)
     const snippetMeta = [
         {
+            title: 'zero-hunger-backend/src/DonationService.java',
             label: 'ZeroHunger · Spring Boot · React',
             status: 'shipped (uni project)',
         },
         {
+            title: 'warehouse-server/src/WarehouseServerThread.java',
             label: 'Warehouse Server · Java · TCP',
             status: 'shipped (uni project)',
         },
         {
+            title: 'deep-learning/src/model.py',
             label: 'DeepLearningRepo · Python · TensorFlow',
             status: 'coursework (ML)',
         },
     ];
 
+
     const snippetLabelEl = document.getElementById('snippetLabel');
     const snippetStatusEl = document.getElementById('snippetStatus');
+    const snippetTitleEl = document.getElementById('snippetTitle');
+
 
     function applySnippetMeta(index) {
-        if (!snippetLabelEl || !snippetStatusEl) return;
+        if (!snippetLabelEl || !snippetStatusEl || !snippetTitleEl) return;
         const meta = snippetMeta[index];
         snippetLabelEl.textContent = meta.label;
         snippetStatusEl.textContent = meta.status;
+        snippetTitleEl.textContent = meta.title;
     }
+
 
     if (snippets.length > 0) {
         // Show first snippet + its meta
