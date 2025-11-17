@@ -3,114 +3,1233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiktor Jagla | Portfolio</title>
+    <title>Wiktor Jagla | Software Engineer</title>
     <style>
+        :root {
+            --bg-main: #050816;
+            --bg-elevated: #0f172a;
+            --bg-card: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --accent-strong: #f97316;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-subtle: rgba(148, 163, 184, 0.2);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-pill: 999px;
+            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+            --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.9);
+            --max-width: 1080px;
+            --transition-fast: 150ms ease-out;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+            color: var(--text-main);
         }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        h2 {
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 5px;
-        }
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .project-card {
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .project-card a {
-            display: inline-block;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #1abc9c;
-            color: white;
+
+        a {
+            color: inherit;
             text-decoration: none;
-            border-radius: 5px;
         }
-        .footer {
+
+        /* Layout */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shell {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header / Nav */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(16px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6), transparent);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1.5rem;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 40%;
+            background: radial-gradient(circle at 30% 0%, #38bdf8 0, #0ea5e9 30%, #0f172a 65%, #020617 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4), 0 12px 25px rgba(15, 23, 42, 0.9);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e5f3ff;
+        }
+
+        .brand-text-main {
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .brand-text-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: var(--radius-pill);
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: #e5e7eb;
+            background: rgba(15, 23, 42, 0.8);
+            border-color: rgba(148, 163, 184, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .nav-link-primary {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0b1120;
+            font-weight: 600;
+            box-shadow: 0 12px 30px rgba(8, 47, 73, 0.6);
+            border-color: transparent;
+        }
+
+        .nav-link-primary:hover {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            transform: translateY(-1px) translateX(0.5px);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-main);
+            border-radius: 999px;
+            margin: 4px 0;
+            transition: transform 0.15s, opacity 0.15s;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .nav-links-mobile {
+            display: none;
+            flex-direction: column;
+            padding: 0 1.5rem 0.75rem;
+            gap: 0.4rem;
+        }
+
+        .nav-links-mobile .nav-link {
+            width: 100%;
             text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 20px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 4.75rem 1.5rem 3.25rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.22rem 0.6rem 0.22rem 0.25rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.23) 0, rgba(15, 23, 42, 0.96) 55%);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+            margin-bottom: 1.1rem;
+        }
+
+        .pill-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 20% 0%, #38bdf8 0, #0ea5e9 38%, #1e293b 80%);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+        }
+
+        .pill-text {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #e5f3ff;
+        }
+
+        .hero-title {
+            font-size: clamp(2.1rem, 4vw, 2.7rem);
+            line-height: 1.18;
+            font-weight: 700;
+            margin: 0 0 0.6rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 34rem;
+            line-height: 1.65;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--text-muted);
+            background: rgba(15, 23, 42, 0.75);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.55rem 0.9rem;
+            font-size: 0.85rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid transparent;
+            cursor: pointer;
+            background: none;
+            color: var(--text-main);
+            transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0b1120;
+            font-weight: 600;
+            box-shadow: 0 14px 36px rgba(8, 47, 73, 0.75);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 45px rgba(8, 47, 73, 0.85);
+        }
+
+        .btn-ghost {
+            border-color: rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.65);
+            color: var(--text-muted);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(15, 23, 42, 0.95);
+            border-color: rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .hero-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .hero-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            justify-self: stretch;
+        }
+
+        .hero-panel {
+            position: relative;
+            border-radius: 22px;
+            padding: 1.4rem 1.3rem 1.2rem;
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.28) 0, rgba(15, 23, 42, 0.98) 45%, #020617 100%);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.7rem;
+        }
+
+        .panel-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .panel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #4b5563;
+        }
+
+        .panel-dot:nth-child(1) {
+            background: #f97316;
+        }
+        .panel-dot:nth-child(2) {
+            background: #eab308;
+        }
+        .panel-dot:nth-child(3) {
+            background: #22c55e;
+        }
+
+        .panel-title {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .panel-body {
+            border-radius: 0.9rem;
+            background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.23) 0, rgba(15, 23, 42, 1) 50%);
+            padding: 0.9rem 0.85rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.74rem;
+            color: #e5f3ff;
+            max-height: 250px;
+            overflow: hidden;
+        }
+
+        .code-line {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.12rem;
+        }
+
+        .code-line .ln {
+            opacity: 0.45;
+            width: 1.4rem;
+            text-align: right;
+        }
+
+        .code-line .src {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kw { color: #38bdf8; }
+        .fn { color: #f97316; }
+        .ty { color: #a5b4fc; }
+        .cm { color: #6b7280; }
+        .st { color: #facc15; }
+
+        .panel-footer {
+            margin-top: 0.6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Sections */
+        section {
+            padding: 2.8rem 1.5rem 0.5rem;
+        }
+
+        .section-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-kicker {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section-blurb {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 25rem;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.3fr);
+            gap: 1.8rem;
+            align-items: flex-start;
+        }
+
+        .about-card {
+            background: rgba(15, 23, 42, 0.96);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem 1.3rem;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+        }
+
+        .about-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .about-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .about-pill {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: #e5e7eb;
+        }
+
+        .edu-card {
+            background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.22) 0, rgba(15, 23, 42, 0.98) 50%);
+            border-radius: var(--radius-lg);
+            padding: 1.1rem 1.2rem;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            box-shadow: var(--shadow-card);
+            font-size: 0.85rem;
+        }
+
+        .edu-title {
+            font-weight: 600;
+            margin-bottom: 0.1rem;
+        }
+
+        .edu-meta {
+            color: var(--text-muted);
+            margin-bottom: 0.55rem;
+        }
+
+        .edu-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.3rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.97);
+            border-radius: var(--radius-lg);
+            padding: 1.1rem 1.1rem 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .project-badge-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-type {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .project-chip {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .project-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .project-body {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.3rem;
+        }
+
+        .project-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            color: var(--text-muted);
+        }
+
+        .project-footer {
+            margin-top: 0.55rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .project-link {
+            font-size: 0.8rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.18rem;
+            padding: 0.2rem 0.35rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid transparent;
+        }
+
+        .project-link:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 1.5rem;
+        }
+
+        .skill-group-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .pill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .pill-chip {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+        }
+
+        .xp-card {
+            background: rgba(15, 23, 42, 0.97);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.1rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: var(--shadow-card);
+            font-size: 0.83rem;
+            color: var(--text-muted);
+        }
+
+        .xp-role {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.1rem;
+        }
+
+        .xp-meta {
+            font-size: 0.78rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .xp-list {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .xp-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Contact */
+        .contact-card {
+            background: rgba(15, 23, 42, 0.98);
+            border-radius: 1.1rem;
+            padding: 1.2rem 1.3rem 1.3rem;
+            border: 1px solid rgba(56, 189, 248, 0.5);
+            box-shadow: var(--shadow-card);
+            font-size: 0.85rem;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.7rem;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(15, 23, 42, 0.96);
+            color: var(--text-main);
+            font-size: 0.8rem;
+        }
+
+        .contact-pill span {
+            color: var(--text-muted);
+        }
+
+        .footer {
+            padding: 1.2rem 1.5rem 1.6rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(148, 163, 184, 0.25);
+            margin-top: 2.4rem;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+        }
+
+        .footer-link:hover {
+            color: #e5e7eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 2.2rem;
+            }
+            .hero {
+                padding-top: 3.5rem;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .about-grid,
+            .skills-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-toggle {
+                display: inline-flex;
+                flex-direction: column;
+            }
+            .nav-links-mobile.open {
+                display: flex;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-panel {
+                margin-top: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 3.1rem;
+            }
+            .shell {
+                padding: 0 1.1rem;
+            }
+            section {
+                padding-left: 1.1rem;
+                padding-right: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Wiktor Jagla</h1>
-        <p>Computer Science Student | Backend Developer | Problem Solver</p>
-        <p>Email: wiktorjagla@gmail.com | GitHub: <a href="https://github.com/JaglaJpg" target="_blank" style="color:#1abc9c;">JaglaJpg</a></p>
+<div class="page">
+    <!-- Header / Nav -->
+    <header class="site-header">
+        <div class="shell">
+            <div class="nav-row">
+                <a href="#top" class="brand">
+                    <div class="brand-mark">WJ</div>
+                    <div>
+                        <div class="brand-text-main">Wiktor Jagla</div>
+                        <div class="brand-text-sub">Software Engineering & CS @ Brunel</div>
+                    </div>
+                </a>
+                <nav class="nav-links">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#contact" class="nav-link nav-link-primary">Contact</a>
+                </nav>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <nav class="nav-links-mobile" id="navMobile">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link nav-link-primary">Contact</a>
+            </nav>
+        </div>
     </header>
-    
-    <div class="container">
-        <h2>About Me</h2>
-        <p>Results-focused Computer Science student experienced in Java, Python, and C#. Passionate about backend development, problem-solving, and Agile methodologies.</p>
-    
-        <h2>Education</h2>
-        <p><strong>Brunel University London</strong> (2023 - 2027) - BSc Computer Science</p>
-        
-        <h2>Projects</h2>
-        <div class="projects">
-            <div class="project-card">
-                <h3>ZeroHunger WebApp</h3>
-                <p>Full-stack donation platform using Spring Boot and React. Includes location-based listings, JWT authentication, a donation tracker, and personal analytics.</p>
-                <p><strong>Tech:</strong> Spring Boot, React, Vite, Tailwind, JWT</p>
-                <a href="https://github.com/JaglaJpg/ZeroHunger_WebApp" target="_blank">View on GitHub</a>
+
+    <!-- Hero -->
+    <main id="top">
+        <section class="hero">
+            <div class="shell">
+                <div class="hero-grid">
+                    <div>
+                        <div class="pill">
+                            <div class="pill-dot"></div>
+                            <div class="pill-text">Final-year CS @ Brunel · Backend & Systems</div>
+                        </div>
+                        <h1 class="hero-title">
+                            Building things that actually run<br><span>backends, systems & ML</span>.
+                        </h1>
+                        <p class="hero-subtitle">
+                            I’m Wiktor – a Computer Science student turning coursework, side projects and
+                            “what if I just built this?” ideas into production-style code. I enjoy backend-heavy work,
+                            concurrent systems, and anything with a bit of algorithmic or ML flavour.
+                        </p>
+
+                        <div class="hero-tags">
+                            <span class="tag">Java · Spring Boot</span>
+                            <span class="tag">React · TypeScript</span>
+                            <span class="tag">Concurrency & Sockets</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">Unity · C#</span>
+                            <span class="tag">Raspberry Pi</span>
+                        </div>
+
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="https://github.com/JaglaJpg" target="_blank" rel="noreferrer">
+                                View GitHub
+                            </a>
+                            <a class="btn btn-ghost" href="#projects">
+                                Skip to projects
+                            </a>
+                        </div>
+
+                        <div class="hero-meta">
+                            <span>Currently: building a maze DSL & pathfinding sandbox for my final-year project.</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="hero-panel">
+                            <div class="panel-header">
+                                <div class="panel-dots">
+                                    <span class="panel-dot"></span>
+                                    <span class="panel-dot"></span>
+                                    <span class="panel-dot"></span>
+                                </div>
+                                <div class="panel-title">zero-hunger-backend/src/DonationService.java</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="code-line"><span class="ln">01</span><span class="src"><span class="kw">public class</span> <span class="ty">DonationService</span> {</span></div>
+                                <div class="code-line"><span class="ln">02</span><span class="src">    <span class="cm">// match donor listings to nearest charities using geo-coordinates</span></span></div>
+                                <div class="code-line"><span class="ln">03</span><span class="src">    <span class="kw">public</span> <span class="ty">List</span>&lt;<span class="ty">CharityMatch</span>&gt; <span class="fn">suggestMatches</span>(<span class="ty">Donation</span> donation) {</span></div>
+                                <div class="code-line"><span class="ln">04</span><span class="src">        <span class="ty">Coordinate</span> origin = donation.<span class="fn">getLocation</span>();</span></div>
+                                <div class="code-line"><span class="ln">05</span><span class="src">        <span class="ty">List</span>&lt;<span class="ty">Charity</span>&gt; candidates = charityRepository.<span class="fn">findAllActive</span>();</span></div>
+                                <div class="code-line"><span class="ln">06</span><span class="src"></span></div>
+                                <div class="code-line"><span class="ln">07</span><span class="src">        <span class="ty">PriorityQueue</span>&lt;<span class="ty">CharityMatch</span>&gt; queue =</span></div>
+                                <div class="code-line"><span class="ln">08</span><span class="src">            <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a, b) -&gt; <span class="ty">Double</span>.<span class="fn">compare</span>(a.distanceKm(), b.distanceKm()));</span></div>
+                                <div class="code-line"><span class="ln">09</span><span class="src"></span></div>
+                                <div class="code-line"><span class="ln">10</span><span class="src">        <span class="kw">for</span> (<span class="ty">Charity</span> charity : candidates) {</span></div>
+                                <div class="code-line"><span class="ln">11</span><span class="src">            <span class="ty">double</span> distance = geo.<span class="fn">distanceKm</span>(origin, charity.<span class="fn">getLocation</span>());</span></div>
+                                <div class="code-line"><span class="ln">12</span><span class="src">            queue.<span class="fn">add</span>(<span class="kw">new</span> <span class="ty">CharityMatch</span>(charity, distance));</span></div>
+                                <div class="code-line"><span class="ln">13</span><span class="src">        }</span></div>
+                                <div class="code-line"><span class="ln">14</span><span class="src"></span></div>
+                                <div class="code-line"><span class="ln">15</span><span class="src">        <span class="kw">return</span> queue.<span class="fn">stream</span>()</span></div>
+                                <div class="code-line"><span class="ln">16</span><span class="src">            .<span class="fn">limit</span>(10)</span></div>
+                                <div class="code-line"><span class="ln">17</span><span class="src">            .<span class="fn">toList</span>();</span></div>
+                                <div class="code-line"><span class="ln">18</span><span class="src">    }</span></div>
+                                <div class="code-line"><span class="ln">19</span><span class="src">}</span></div>
+                                <div class="code-line"><span class="ln">20</span><span class="src"></span></div>
+                                <div class="code-line"><span class="ln">21</span><span class="src"><span class="cm">// actual project: ZeroHunger – full-stack donation platform</span></span></div>
+                            </div>
+                            <div class="panel-footer">
+                                <span>ZeroHunger · Spring Boot · React</span>
+                                <span>status: <span style="color: var(--accent-strong); font-weight: 500;">shipped (uni project)</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Dancing Robot Project</h3>
-                <p>Developed a program for a Raspberry Pi robot that scanned QR codes and performed automated tasks.</p>
-                <p><strong>Tech:</strong> Java, Raspberry Pi API</p>
-                <a href="https://github.com/JaglaJpg/RasberryPiRobot" target="_blank">View on GitHub</a>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <div class="section-inner">
+                <div class="section-kicker">About</div>
+                <div class="section-title-row">
+                    <h2 class="section-title">Who I am</h2>
+                    <p class="section-blurb">
+                        Final-year Computer Science student at Brunel University London, focusing on backend development,
+                        concurrent systems and practical ML. I like projects that feel like “real software”, not just lab sheets.
+                    </p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <p class="about-text">
+                            I’m currently working on my final-year project: a domain-specific language and sandbox for maze
+                            generation and pathfinding experiments. Before that, I built a full-stack donation platform (ZeroHunger),
+                            a multi-threaded warehouse server with custom TCP clients, a Raspberry Pi robot controller, and a CNN-based
+                            brain tumour classifier.
+                        </p>
+                        <p class="about-text">
+                            I enjoy roles where I can own a slice of the backend, think about data flow and performance,
+                            and still collaborate closely with the rest of the team. I’m comfortable picking up new tools
+                            as long as there’s an interesting problem at the centre of it.
+                        </p>
+                        <div class="about-pill-row">
+                            <span class="about-pill">Back-end focused</span>
+                            <span class="about-pill">Enjoys concurrency & systems</span>
+                            <span class="about-pill">Comfortable across the stack</span>
+                        </div>
+                    </div>
+                    <div class="edu-card">
+                        <div class="edu-title">Brunel University London</div>
+                        <div class="edu-meta">BSc Computer Science · Final year</div>
+                        <div class="edu-note">
+                            Relevant work includes:
+                            <ul style="margin: 0.4rem 0 0; padding-left: 1.1rem;">
+                                <li>Distributed Systems & Concurrency</li>
+                                <li>Machine Learning & Data Analysis</li>
+                                <li>Software Engineering & UX</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Transposition Cipher Breaker</h3>
-                <p>Implemented a genetic algorithm to crack transposition ciphers.</p>
-                <p><strong>Tech:</strong> Python, Cryptography</p>
-                <a href="https://github.com/JaglaJpg/Transposition-Cipher-Breaker" target="_blank">View on GitHub</a>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="section-inner">
+                <div class="section-kicker">Projects</div>
+                <div class="section-title-row">
+                    <h2 class="section-title">Selected work</h2>
+                    <p class="section-blurb">
+                        A mix of university projects and personal experiments that cover backend systems, full-stack web,
+                        ML, cryptography, game dev and robotics.
+                    </p>
+                </div>
+                <div class="projects-grid">
+                    <!-- ZeroHunger -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">Full-stack</span>
+                            <span class="project-chip">ZeroHunger WebApp</span>
+                        </div>
+                        <h3 class="project-title">ZeroHunger – Donation & food waste platform</h3>
+                        <p class="project-body">
+                            Full-stack web application that connects donors with nearby food banks and charities.
+                            Features JWT auth, geolocation-based charity matching, donation tracking and personal analytics.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Spring Boot</span>
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">React · Vite</span>
+                            <span class="project-tag">Tailwind</span>
+                            <span class="project-tag">JWT</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/ZeroHunger_WebApp" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Group project · Backend lead</span>
+                        </div>
+                    </article>
+
+                    <!-- Warehouse server -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">Systems</span>
+                            <span class="project-chip">Warehouse Server</span>
+                        </div>
+                        <h3 class="project-title">Multi-threaded Warehouse Server & Clients</h3>
+                        <p class="project-body">
+                            Concurrent TCP server managing a shared warehouse state (apples/oranges) with separate customer
+                            and supplier clients, thread-safe access and a custom text protocol.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">Sockets</span>
+                            <span class="project-tag">Multithreading</span>
+                            <span class="project-tag">Concurrency</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/Warehouse-Server-Client-Application" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Uni project · Systems</span>
+                        </div>
+                    </article>
+
+                    <!-- DeepLearning -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">ML</span>
+                            <span class="project-chip">Brain Tumour CNN</span>
+                        </div>
+                        <h3 class="project-title">Brain tumour MRI classifier</h3>
+                        <p class="project-body">
+                            CNN-based classifier for brain tumour MRI images (glioma, notumor, pituitary). Converted a
+                            Colab notebook into a proper Python project with train/eval scripts, class weighting, early stopping
+                            and confusion matrix visualisation.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">TensorFlow</span>
+                            <span class="project-tag">NumPy · Matplotlib</span>
+                            <span class="project-tag">ML pipeline</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/DeepLearningRepo" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">ML coursework · Refactored</span>
+                        </div>
+                    </article>
+
+                    <!-- Raspberry Pi -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">Hardware</span>
+                            <span class="project-chip">Raspberry Pi Robot</span>
+                        </div>
+                        <h3 class="project-title">QR-driven Raspberry Pi robot</h3>
+                        <p class="project-body">
+                            Programmed a SwiftBot Raspberry Pi robot to read QR codes, react to environment input and perform
+                            scripted behaviours. Includes LED control, movement logic and small state machines.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Raspberry Pi</span>
+                            <span class="project-tag">Embedded</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/RasberryPiRobot" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Hardware · Requires Pi</span>
+                        </div>
+                    </article>
+
+                    <!-- Cipher -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">Algorithms</span>
+                            <span class="project-chip">Cipher Breaker</span>
+                        </div>
+                        <h3 class="project-title">Transposition Cipher Breaker</h3>
+                        <p class="project-body">
+                            Personal project from sixth form: a tool to break transposition ciphers using heuristic search.
+                            Explores scoring candidate plaintexts and searching key-space with genetic-style approaches.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Cryptography</span>
+                            <span class="project-tag">Heuristics</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/Transposition-Cipher-Breaker" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Personal · Pre-uni</span>
+                        </div>
+                    </article>
+
+                    <!-- Game -->
+                    <article class="project-card">
+                        <div class="project-badge-row">
+                            <span class="project-type">Game dev</span>
+                            <span class="project-chip">2D Unity Game</span>
+                        </div>
+                        <h3 class="project-title">2D action prototype in Unity</h3>
+                        <p class="project-body">
+                            An experimental 2D game exploring character state machines, enemy behaviour and level flow.
+                            Not a finished title, but enough implemented to show gameplay logic and structure.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">State machines</span>
+                        </div>
+                        <div class="project-footer">
+                            <a class="project-link" href="https://github.com/JaglaJpg/2DUnityGame" target="_blank" rel="noreferrer">
+                                View on GitHub →
+                            </a>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">Personal · Incomplete prototype</span>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>2D Unity Game</h3>
-                <p>Designed a Unity-based game using finite state machines for character behavior.</p>
-                <p><strong>Tech:</strong> Unity, C#, Game Development</p>
-                <a href="https://github.com/JaglaJpg/2DUnityGame" target="_blank">View on GitHub</a>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="section-inner">
+                <div class="section-kicker">Skills</div>
+                <div class="section-title-row">
+                    <h2 class="section-title">What I work with</h2>
+                    <p class="section-blurb">
+                        Tools and technologies I’ve used across coursework, projects and side experiments.
+                    </p>
+                </div>
+                <div class="skills-grid">
+                    <div>
+                        <div class="skill-group">
+                            <div class="skill-group-title">Languages & frameworks</div>
+                            <div class="pill-cloud">
+                                <span class="pill-chip">Java (Spring Boot)</span>
+                                <span class="pill-chip">Python</span>
+                                <span class="pill-chip">JavaScript / TypeScript</span>
+                                <span class="pill-chip">React</span>
+                                <span class="pill-chip">C# (Unity)</span>
+                            </div>
+                        </div>
+                        <div style="height: 0.9rem;"></div>
+                        <div class="skill-group">
+                            <div class="skill-group-title">Areas</div>
+                            <div class="pill-cloud">
+                                <span class="pill-chip">Backend APIs</span>
+                                <span class="pill-chip">Concurrency & multithreading</span>
+                                <span class="pill-chip">Distributed / networked systems</span>
+                                <span class="pill-chip">Machine learning (CNNs)</span>
+                                <span class="pill-chip">Robotics & embedded</span>
+                                <span class="pill-chip">Game logic & state machines</span>
+                            </div>
+                        </div>
+                        <div style="height: 0.9rem;"></div>
+                        <div class="skill-group">
+                            <div class="skill-group-title">Tooling</div>
+                            <div class="pill-cloud">
+                                <span class="pill-chip">Git & GitHub</span>
+                                <span class="pill-chip">Linux / CLI</span>
+                                <span class="pill-chip">PyCharm / IntelliJ / VS Code</span>
+                                <span class="pill-chip">Jupyter / Colab</span>
+                                <span class="pill-chip">Postman / REST tooling</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xp-card">
+                        <div class="xp-role">McDonald's Crew Member & Trainer</div>
+                        <div class="xp-meta">Oct 2023 – Present · Part-time alongside degree</div>
+                        <ul class="xp-list">
+                            <li>Trained new staff and helped keep a high-throughput environment running smoothly.</li>
+                            <li>Worked in fast, occasionally chaotic conditions while maintaining quality and pace.</li>
+                            <li>Built the kind of patience and communication that helps when debugging production issues with others watching.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="section-inner">
+                <div class="section-kicker">Contact</div>
+                <div class="section-title-row">
+                    <h2 class="section-title">Say hello</h2>
+                    <p class="section-blurb">
+                        I’m currently looking at graduate software engineering roles starting 2025. If my projects look
+                        relevant, I’d be happy to chat.
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <p>
+                        The easiest way to reach me is by email. I’m also active on GitHub, and can share further details
+                        of my final-year project or any of the work above on request.
+                    </p>
+                    <div class="contact-row">
+                        <a class="contact-pill" href="mailto:wiktorjagla@gmail.com">
+                            <span>Email</span>
+                            <strong>wiktorjagla@gmail.com</strong>
+                        </a>
+                        <a class="contact-pill" href="https://github.com/JaglaJpg" target="_blank" rel="noreferrer">
+                            <span>GitHub</span>
+                            <strong>@JaglaJpg</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>© <span id="year"></span> · Built by Wiktor Jagla</span>
+            <div class="footer-links">
+                <a class="footer-link" href="https://github.com/JaglaJpg" target="_blank" rel="noreferrer">GitHub</a>
+                <!-- Add LinkedIn when ready -->
             </div>
         </div>
-        
-        <h2>Skills</h2>
-        <p><strong>Programming:</strong> Java, Python, C#</p>
-        <p><strong>Tools:</strong> Unity Engine, Raspberry Pi API, GitHub, Agile, Scrum</p>
-        <p><strong>Soft Skills:</strong> Teamwork, Communication, Leadership</p>
-        
-        <h2>Work Experience</h2>
-        <p><strong>McDonald’s Crew Member (Crew Trainer in Progress)</strong> - Oct 2023 - Present</p>
-        <p>Developed leadership and teamwork skills in a high-paced environment, training new employees and ensuring quality service.</p>
-    </div>
-    
-    <div class="footer">
-        <p>© 2024 Wiktor Jagla | <a href="https://github.com/JaglaJpg" target="_blank" style="color:#1abc9c;">GitHub</a> | Email: wiktorjagla@gmail.com</p>
-    </div>
+    </footer>
+</div>
+
+<script>
+    // Mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const navMobile = document.getElementById('navMobile');
+
+    if (navToggle && navMobile) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('open');
+            navMobile.classList.toggle('open');
+        });
+
+        navMobile.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('open');
+                navMobile.classList.remove('open');
+            });
+        });
+    }
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
